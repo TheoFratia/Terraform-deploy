@@ -1,10 +1,3 @@
-provider "google" {
-  credentials = file("../credentials.json")
-  project     = var.project
-  region      = var.region
-  zone        = var.zone
-}
-
 resource "google_compute_instance" "api_vm" {
   name         = "api-vm"
   machine_type = "f1-micro"
