@@ -22,7 +22,7 @@ jobs:
           terraform_version: 1.5.7
 
       - name: Debug Secret Injection (temp)
-        run: echo "${{ secrets.GCP_SA_KEY }}" | head -c 100
+        run: echo "${{ secrets.GCP_SA_KEY }}" | head -c 100 
           
       - name: Setup Google Cloud auth
         uses: google-github-actions/auth@v2
