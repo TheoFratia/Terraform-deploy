@@ -1,0 +1,41 @@
+name: Deploy Infrastructure + App to GCP
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  terraform-and-deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform  # <-- ici tu dis à GitHub Actions d’exécuter les commandes dans ce dossier
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7
+
+      - name: Setup Google Cloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Create terraform.tfvars file
+        run: |
+          echo 'admin_username = "ubuntu"' > terraform.tfvars
+          echo 'public_ssh_key = "${{ secrets.PUBLIC_SSH_KEY }}"' > terraform.tfvars
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Output public IP
+        run: terraform output -raw public_ip

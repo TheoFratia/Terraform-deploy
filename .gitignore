@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+credentials.json
+api/node_modules
+infra/.terraform/providers/registry.terraform.io/hashicorp/google/6.35.0/darwin_arm64/LICENSE.txt
+infra/.terraform/providers/registry.terraform.io/hashicorp/google/6.35.0/darwin_arm64/terraform-provider-google_v6.35.0_x5
+infra/terraform.tfstate.backup
+infra/terraform.tfstate
+infra/.terraform.lock.hcl
