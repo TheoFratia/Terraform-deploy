@@ -20,6 +20,12 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.5.7
+
+      - name: Restore Terraform state from cache
+        uses: actions/cache@v3
+        with:
+          path: terraform/terraform.tfstate
+          key: terraform-state-${{ github.ref }}
           
       - name: Setup Google Cloud auth
         uses: google-github-actions/auth@v2
@@ -36,6 +42,12 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
+      - name: Save Terraform state to cache
+        uses: actions/cache@v3
+        with:
+          path: terraform/terraform.tfstate
+          key: terraform-state-${{ github.ref }}
 
       - name: Output public IP
         run: terraform output -raw ip_vm
