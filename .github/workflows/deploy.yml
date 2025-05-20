@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: infra  # <-- ici tu dis à GitHub Actions d’exécuter les commandes dans ce dossier
+        working-directory: infra  # <-- ici tu dis à GitHub Actions d’exécuter les commandes dans ce dossier 
 
     steps:
       - name: Checkout code
