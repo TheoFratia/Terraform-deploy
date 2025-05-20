@@ -38,4 +38,4 @@ jobs:
         run: terraform apply -auto-approve
 
       - name: Output public IP
-        run: terraform output -raw public_ip
+        run: terraform output -raw ip_vm
